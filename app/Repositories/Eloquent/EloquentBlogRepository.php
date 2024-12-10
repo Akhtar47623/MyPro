@@ -2,6 +2,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Blog;
+use Illuminate\Support\Str;
 use App\Repositories\Interfaces\BlogRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
@@ -26,7 +27,12 @@ class EloquentBlogRepository implements BlogRepositoryInterface
 
     public function createBlog(array $data)
     {
-
+        $slug = Str::slug($data['title'], '-');
+        if (Blog::where('slug', $slug)->exists()) {
+            $slug = $this->generateUniqueSlug($slug);
+        }
+        $data['user_id'] = auth()->user()->id;
+        $data['slug'] = $slug;
         return Blog::create($data);
     }
 
@@ -46,5 +52,17 @@ class EloquentBlogRepository implements BlogRepositoryInterface
     public function getAllCategories()
     {
         return $this->categoryRepository->getAllCategories();
+    }
+    private function generateUniqueSlug($slug)
+    {
+        $originalSlug = $slug;
+        $count = 1;
+
+        // Keep appending a number until a unique slug is found
+        while (Blog::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count++;
+        }
+
+        return $slug;
     }
 }

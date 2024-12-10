@@ -20,7 +20,6 @@ class EloquentCategoryRepository implements CategoryRepositoryInterface
 
     public function createCategory(array $data)
     {
-        dd('here');
         $slug = Str::slug($data['name'], '-');
         if (Category::where('slug', $slug)->exists()) {
             $slug = $this->generateUniqueSlug($slug);

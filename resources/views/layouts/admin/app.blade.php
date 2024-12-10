@@ -11,6 +11,7 @@
     <title>Gentelella Alela!</title>
 
     @include('layouts.admin.includes.links')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body class="nav-md">
@@ -93,6 +94,25 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('assets/build/js/custom.min.js')}}"></script>
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form if confirmed
+                    document.getElementById('delete-form-' + id).submit();
+                }
+            });
+        }
+    </script>
+
 
  @stack('js')
 

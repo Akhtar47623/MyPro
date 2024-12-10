@@ -27,7 +27,7 @@
           <ul class="nav side-menu">
             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-right"></span></a>
             </li>
-            <li><a href="{{route('webIndexPage')}}"><i class="fa fa-edit"></i> Post Management <span class="fa fa-chevron-right"></span></a>
+            <li><a href="{{ route('blogs.index') }}"><i class="fa fa-edit"></i> Blog Management <span class="fa fa-chevron-right"></span></a>
             <li><a><i class="fa fa-edit"></i> Categories Management <span class="fa fa-chevron-right"></span></a>
             </li>
             <li><a><i class="fa fa-desktop"></i> Users <span class="fa fa-chevron-right"></a>

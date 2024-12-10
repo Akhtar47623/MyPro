@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\BlogController;
-use App\Http\Controllers\web\CategoryController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Web\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,8 @@ use App\Http\Controllers\Auth\NewPasswordController;
 
 
 // About Pages
-Route::get('/', function () {
-    return view('front/about'); // View for the About page
-})->name('webIndexPage');
+
+Route::get('/', [HomeController::class, 'index'])->name('webIndexPage');
 Route::get('/about', function () {
     return view('front/about'); // View for the About page
 })->name('webAboutPage');
@@ -55,8 +55,10 @@ Route::get('/contact', function () {
     return view('front/contact'); // View for the Contact page
 })->name('webContactPage');
 
-Route::resource('admin/blogs', BlogController::class);
-Route::resource('admin/categories', CategoryController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('admin/blogs', BlogController::class);
+    Route::resource('admin/categories', CategoryController::class);
+});
 
 
 
