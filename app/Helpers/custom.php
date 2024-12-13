@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Config;
 use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('uploadImage')) {
@@ -19,4 +20,8 @@ if (!function_exists('uploadImage')) {
         }
         return null;
     }
+    function setting($key, $default = null) {
+        return Config::where('key', $key)->value('value') ?? $default;
+    }
+
 }

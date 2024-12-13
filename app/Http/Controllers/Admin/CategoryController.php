@@ -17,8 +17,8 @@ class CategoryController extends Controller
 
     public function index()
     {
-        // $categories = $this->categoryRepository->getAllCategories();
-        return view('admin.Categories.index');
+        $categories = $this->categoryRepository->getAllCategories();
+        return view('admin.Categories.index',compact('categories'));
     }
 
     public function create()

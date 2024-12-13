@@ -12,7 +12,7 @@
 				<div class="col-lg-10 col-md-8 text-center text-lg-right text-md-right">
 					<div class="header-top-info">
 						<a href="tel:+23-345-67890">Call Us : <span>+23-345-67890</span></a>
-						<a href="mailto:support@gmail.com" ><i class="fa fa-envelope mr-2"></i><span>support@gmail.com</span></a>
+						<a href="mailto:{{ setting('email', 'default@example.com') }}" ><i class="fa fa-envelope mr-2"></i><span>{{ setting('email', 'default@example.com') }}</span></a>
 					</div>
 				</div>
 			</div>
@@ -57,7 +57,9 @@
 			<form class="form-lg-inline my-2 my-md-0 ml-lg-4 text-center">
 			  <a href="{{route('webContactPage')}}" class="btn btn-solid-border btn-round-full">Get a Quote</a>
 			</form>
-		  </div>
+                <a href="{{route('login')}}" class="text-white ml-5">Signin</a><span class="text-white mx-1">/</span>
+                <a href="{{route('register')}}" class="text-white">Signup</a>
+        </div>
 		</div>
 	</nav>
 </header>

@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
-use App\Repositories\Eloquent\EloquentBlogRepository;
-use App\Repositories\Eloquent\EloquentCategoryRepository;
+use App\Repositories\DatabaseLayer\BlogRepository;
+use App\Repositories\DatabaseLayer\CategoryRepository;
 use App\Repositories\Interfaces\BlogRepositoryInterface;
+use App\Repositories\DatabaseLayer\UserRepository;
+use App\Repositories\DatabaseLayer\PermissionRepository;
+use App\Repositories\DatabaseLayer\RoleRepository;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\PermissionRepositoryInterface;
+use App\Repositories\Interfaces\RoleRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -17,8 +23,11 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(BlogRepositoryInterface::class, EloquentBlogRepository::class);
-        $this->app->bind(CategoryRepositoryInterface::class, EloquentCategoryRepository::class);
+        $this->app->bind(BlogRepositoryInterface::class, BlogRepository::class);
+        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(PermissionRepositoryInterface::class, PermissionRepository::class);
+        $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
     }
 
     /**

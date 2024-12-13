@@ -23,18 +23,55 @@
       <!-- sidebar menu -->
       <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
         <div class="menu_section">
-          <h3>General</h3>
-          <ul class="nav side-menu">
-            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-right"></span></a>
+            <h3>General</h3>
+            <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <h3>Dashboard</h3>
+                        <li><a href="{{route('webIndexPage')}}">Visit Website</a></li>
+                        <li><a href="index3.html">Favicon Management</a></li>
+                        <li><a href="index3.html">Logo Management</a></li>
+                        <li><a href="index3.html">Banner Management</a></li>
+                        <li><a href="{{route('config.edit')}}">Config</a></li>
+                </ul>
             </li>
-            <li><a href="{{ route('blogs.index') }}"><i class="fa fa-edit"></i> Blog Management <span class="fa fa-chevron-right"></span></a>
-            <li><a><i class="fa fa-edit"></i> Categories Management <span class="fa fa-chevron-right"></span></a>
+            <li><a><i class="fa fa-edit"></i> CMS <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a> Pages </a>
+                        <ul class="nav child_menu">
+                            <li><a href="form_advanced.html">Home Page</a></li>
+                            <li><a href="form_validation.html">Contact Us</a></li>
+                            <li><a href="form_wizards.html">About Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
-            <li><a><i class="fa fa-desktop"></i> Users <span class="fa fa-chevron-right"></a>
+            <li><a><i class="fa fa-sliders"></i> Slider Management <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="index2.html">Home Main Slider</a></li>
+                    <li><a href="index2.html">Home Side Slider</a></li>
+                    <li><a href="index3.html">Contact Us</a></li>
+                    <li><a href="index3.html">About Us</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ route('blogs.index') }}"><i class="fa fa-edit"></i> Blog Management <span class="fa fa-chevron-right"></span></a></li>
+            <li><a href="{{ route('categories.index') }}"><i class="fa fa-object-group"></i> Category Management <span class="fa fa-chevron-right"></span></a>
+            </li>
+            <li><a><i class="fa fa-envelope"></i> Inquiry Management <span class="fa fa-chevron-right"></span></a>
+            </li>
+            <li><a><i class="fa fa-user-plus"></i> Manage NewsLetter <span class="fa fa-chevron-right"></span></a>
+            </li>
+            @auth
+                @if(auth()->user()->hasRole('admin'))
+                    <li><a href="{{ route('roles.index') }}"><i class="fa fa-shield"></i>Roles<span class="fa fa-chevron-right"></span></a></li>
+                    <li><a href="{{ route('permissions.index') }}"><i class="fa fa-key"></i>Permissions<span class="fa fa-chevron-right"></span></a></li>
+                    <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> Users Management<span class="fa fa-chevron-right"></span></a>
+                    </li>
+                @endif
+            @endauth
 
-            </li>
-          </ul>
-        </div>
+        </ul>
+    </div>
 
       </div>
       <!-- /sidebar menu -->

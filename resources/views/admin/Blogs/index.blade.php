@@ -9,7 +9,11 @@
                 <div class="x_panel">
                     <div class="x_title d-flex justify-content-between align-items-center">
                         <h2>Blogs</h2>
-                        <button class="btn btn-success"><a href="{{route('blogs.create')}}" class="text-white">Add New Blog</a></button>
+                        @auth
+                            @if(auth()->user()->hasRole('author','admin'))
+                                <button class="btn btn-success"><a href="{{route('blogs.create')}}" class="text-white">Add New Blog</a></button>
+                            @endif
+                        @endauth
                     </div>
                     <div class="x_content">
                         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
@@ -41,16 +45,20 @@
                                         <a href="{{route('blogs.show',$blog->id)}}" class="mx-1" data-toggle="tooltip" title="View">
                                             <i class="fa fa-eye text-info" style="font-size: 18px;"></i>
                                         </a>
-                                        <a href="{{ route('blogs.edit', $blog->id) }}" class="mx-1" data-toggle="tooltip" title="Edit">
-                                            <i class="fa fa-edit" style="font-size: 18px;"></i>
-                                        </a>
-                                        <form id="delete-form-{{ $blog->id }}" action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" onclick="confirmDelete({{ $blog->id }})" style="border: none; background: none; padding: 0; color: red; font-size: 18px;" data-toggle="tooltip" title="Delete">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
+                                       @auth
+                                            @if (auth()->user()->hasRole('admin'))
+                                                <a href="{{ route('blogs.edit', $blog->id) }}" class="mx-1" data-toggle="tooltip" title="Edit">
+                                                    <i class="fa fa-edit" style="font-size: 18px;"></i>
+                                                </a>
+                                                <form id="delete-form-{{ $blog->id }}" action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" onclick="confirmDelete({{ $blog->id }})" style="border: none; background: none; padding: 0; color: red; font-size: 18px;" data-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        @endauth
                                     </td>
                                 </tr>
                                 @endforeach

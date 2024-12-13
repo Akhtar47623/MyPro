@@ -1,12 +1,12 @@
 <?php
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\DatabaseLayer;
 
 use App\Models\Blog;
 use Illuminate\Support\Str;
 use App\Repositories\Interfaces\BlogRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
-class EloquentBlogRepository implements BlogRepositoryInterface
+class BlogRepository implements BlogRepositoryInterface
 {
     protected $categoryRepository;
 

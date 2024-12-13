@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\DatabaseLayer;
 
 use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Support\Str;
 
-class EloquentCategoryRepository implements CategoryRepositoryInterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
     public function getAllCategories()
     {
