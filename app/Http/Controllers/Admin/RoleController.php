@@ -28,7 +28,7 @@ class RoleController extends Controller
     // Create a new role
     public function create()
     {
-        $permissions = $this->permissionRepository->getAllRoles();
+        $permissions = $this->permissionRepository->getAllPermissions();
         return view('admin.roles.create', compact('permissions'));
     }
 
@@ -57,7 +57,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->roleRepository->find($id);
-        $permissions = $this->permissionRepository->getAllRoles();
+        $permissions = $this->permissionRepository->getAllPermissions();
         $rolePermissions = $role->permissions->pluck('id')->toArray(); // Get assigned permission IDs
 
         return view('admin.roles.edit', compact('role', 'permissions', 'rolePermissions'));

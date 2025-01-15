@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('blog_id')->constrained()->onDelete('cascade'); // Blog ID
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // User who commented
-            $table->text('content');
-            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade'); // For replies
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // User who liked
+            $table->morphs('likeable'); // Polymorphic relationship
             $table->timestamps();
         });
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('likes');
     }
 };
